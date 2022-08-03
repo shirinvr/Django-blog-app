@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'posts/styles.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'posts/post.css' %}">
+  <title>Posts</title>
+</head>
+<body>
+  <h1>Write a post</h1>
+  <form 
+    action="{% url 'posts:write_post' %}"
+    method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Post">
+  </form>
+  
+  <h1>Posts</h1>
+  {% if posts %}
+    <ul>
+      {% for post in posts %}
+        <li class="card">
+          <p>{{post.timestamp | date:"d M Y, G:i"}}</p>
+          <h3>
+            <a href="{% url 'posts:post' post.id %}">{{post.title}}</a>
+          </h3>
+          <p>{{post.text}}</p>
+          <p>{{post.comment_set.count}} comments</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h2>There are no posts yet!</h2>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,6 @@
+[client]
+database = django_app
+user = root
+password = password
+host = localhost
+port = 8083

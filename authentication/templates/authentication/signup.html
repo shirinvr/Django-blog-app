@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'authentication/styles.css' %}">
+  <title>Sign up</title>
+</head>
+<body>
+  <h1>Sign up screen</h1>
+  <form
+    action="{% url 'authentication:register'%}"
+    method="post"
+    class="form">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input id="username" type="text" name="username" maxlength="200" required>
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" maxlength="200" required>
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" maxlength="200" required>
+    <input type="submit" value="Sign up">
+  </form>
+</body>
+</html>
